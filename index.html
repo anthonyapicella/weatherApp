@@ -16,30 +16,32 @@
         <h1 class="display-4">WEATHER!</h1>
         <p class="lead">Whether you want it, or not.</p>
         <hr class="my-4">
-        <input class="form-control" type="text" placeholder="Enter City">
-        <button type="submit"  id="user-input" class="btn btn-primary">Submit</button>
+        <input type="text" id="user-input" placeholder="Enter City"></input>
+        <button type="button"  id="gw-btn" class="btn btn-primary">Submit</button>
     </div>
-    <div class="card" style="width: 18rem;">
-        <img src="#" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 id="city-name" class="card-title">City Name</h5>
-          <p id="date" class="card-text">12/12/12</p>
-        </div>
-        <ul class="list-group list-group-flush">
-          <li id="temperature" class="list-group-item"></li>
-          <li id="humidity" class="list-group-item"></li>
-          <li id="wind-speed" class="list-group-item"></li>
-          <li id="uv-index" class="list-group-item"></li>
-        </ul>
-        <div class="card-body">
-          <a href="#" class="card-link">Card link</a>
-          <a href="#" class="card-link">Another link</a>
-        </div>
+    
+    <div id="today-card" class="card" style="width: 18rem; display: none;">
+      <img src="#" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 id="city-name" class="card-title"></h5>
+        <p id="current-day" class="card-text"></p>
       </div>
+      <ul class="list-group list-group-flush">
+        <li id="temperature" class="list-group-item"></li>
+        <li id="humidity" class="list-group-item"></li>
+        <li id="wind-speed" class="list-group-item"></li>
+        <li id="uv-index" class="list-group-item"></li>
+      </ul>
+      <div class="card-body">
+        <a href="#" class="card-link">Card link</a>
+        <a href="#" class="card-link">Another link</a>
+      </div>
+    </div>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
     <script src="./assets/script/script.js"></script>
 </body>
 </html>
