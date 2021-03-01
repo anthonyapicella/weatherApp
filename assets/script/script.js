@@ -1,16 +1,37 @@
 // create a funciton that, on click, will retrieve user input, call weatherAPI and return weather details for given date
 
 // on click
+
+
+
 $("#gw-btn").on('click',(function(){
 	// capture user input and save as cityName
     var cityName = $("#user-input").val()
+	save();
 	
-	// show the todaycard and print current date
+	// show the todaycard and 5day cards, also print current date
     $("#today-card").show();
     $("#current-day").text(moment().format('MMMM Do, YYYY'));
 	$("#five-day-head").show();
 	$("#five-day-forecast").show();
+
+	function save() {
+		var fieldValue = document.getElementById("user-input").value;
 	
+		var arrayOfcities = localStorage.getItem("user_cities");
+		if(!arrayOfcities){
+			arrayOfcities = [];
+		}
+		// arrayOfcities.push(fieldValue);
+		localStorage.setItem("user_cities", arrayOfcities);
+	}
+	
+	window.onload = function load() {
+		var storedValue = localStorage.getItem("weather_urls");
+		if(storedValue) {
+			document.getElementById("display").innerHTML = storedValue;
+		}
+	}
 	// fetch necessary data from open weather API
 	fetch("https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&units=imperial&appid=0f7a14279d2aa10b4c3e156acc3140a9")
 		.then(response => response.json())
@@ -33,7 +54,7 @@ $("#gw-btn").on('click',(function(){
 			var iconurl = "http://openweathermap.org/img/w/" + weatherImg + ".png";
 			
 			// print values to 'todaycard'
-			$('#wicon').attr('src', iconurl,).width(125);
+			$('#wicon').attr('src', iconurl,).width(100);
 			$("#city-name").text(locationName);
 			$("#temperature").text(temp);
 			$("#humidity").text(humidity);
@@ -83,27 +104,22 @@ $("#gw-btn").on('click',(function(){
 			.then(response => {
 				console.log(response)
 				
-				var dateDay1 = response.list[3].dt_txt
 				var tempDay1 = response.list[3].main.temp
 				var humidityDay1 = response.list[3].main.humidity
 				var imgDay1 = response.list[3].weather[0].icon
 
-				var dateDay2 = response.list[11].dt_txt
 				var tempDay2 = response.list[11].main.temp
 				var humidityDay2 = response.list[11].main.humidity
 				var imgDay2 = response.list[11].weather[0].icon
 
-				var dateDay3 = response.list[19].dt_txt
 				var tempDay3 = response.list[19].main.temp
 				var humidityDay3 = response.list[19].main.humidity
 				var imgDay3 = response.list[19].weather[0].icon
 
-				var dateDay4 = response.list[27].dt_txt
 				var tempDay4 = response.list[27].main.temp
 				var humidityDay4 = response.list[27].main.humidity
 				var imgDay4 = response.list[27].weather[0].icon
 
-				var dateDay5 = response.list[35].dt_txt
 				var tempDay5 = response.list[35].main.temp
 				var humidityDay5 = response.list[35].main.humidity
 				var imgDay5 = response.list[35].weather[0].icon
@@ -115,11 +131,31 @@ $("#gw-btn").on('click',(function(){
 				var iconurlDay5 = "http://openweathermap.org/img/w/" + imgDay5 + ".png";
 
 
-				$('#wicon-1').attr('src', iconurlDay1,).width(110);
-				$('#wicon-2').attr('src', iconurlDay2,).width(110);
-				$('#wicon-3').attr('src', iconurlDay3,).width(110);
-				$('#wicon-4').attr('src', iconurlDay4,).width(110);
-				$('#wicon-5').attr('src', iconurlDay5,).width(110);
+				$('#wicon-1').attr('src', iconurlDay1,).width(75);
+				$('#wicon-2').attr('src', iconurlDay2,).width(75);
+				$('#wicon-3').attr('src', iconurlDay3,).width(75);
+				$('#wicon-4').attr('src', iconurlDay4,).width(75);
+				$('#wicon-5').attr('src', iconurlDay5,).width(75);
+
+				$("#five-day-1").text(moment().add(1, 'days').calendar());
+				$("#five-day-2").text(moment().add(2, 'days').calendar());
+				$("#five-day-3").text(moment().add(3, 'days').calendar());
+				$("#five-day-4").text(moment().add(4, 'days').calendar());
+				$("#five-day-5").text(moment().add(5, 'days').calendar());
+
+				
+
+				$("#temp-day-1").text(tempDay1 + "°");
+				$("#temp-day-2").text(tempDay2 + "°");
+				$("#temp-day-3").text(tempDay3 + "°");
+				$("#temp-day-4").text(tempDay4 + "°");
+				$("#temp-day-5").text(tempDay5 + "°");
+
+				$("#humidity-day-1").text(humidityDay1 + "%");
+				$("#humidity-day-2").text(humidityDay2 + "%");
+				$("#humidity-day-3").text(humidityDay3 + "%");
+				$("#humidity-day-4").text(humidityDay4 + "%");
+				$("#humidity-day-5").text(humidityDay5 + "%");
 
 				
 				// console.log(dateDay1)
@@ -150,6 +186,7 @@ $("#gw-btn").on('click',(function(){
 			})
 		})
 	
+
 }))
 
 
