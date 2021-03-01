@@ -21,21 +21,18 @@
     </div>
     
     <div id="today-card" class="card" style="width: 18rem; display: none;">
-      <img src="#" class="card-img-top" alt="...">
+      <div id="icon"><img id="wicon" src="" alt="Weather icon"></div>
       <div class="card-body">
         <h5 id="city-name" class="card-title"></h5>
         <p id="current-day" class="card-text"></p>
       </div>
       <ul class="list-group list-group-flush">
-        <li id="temperature" class="list-group-item"></li>
-        <li id="humidity" class="list-group-item"></li>
-        <li id="wind-speed" class="list-group-item"></li>
-        <li id="uv-index" class="list-group-item"></li>
+        <li class="list-group-item"><span id="temperature"></span>°</li>
+        <li class="list-group-item">Humidity: <span id="humidity"></span></li>
+        <li class="list-group-item">Wind Speed: <span id="wind-speed"></span></li>
+        <li class="list-group-item">UV-index: <span id="uv-index"></span></li>
       </ul>
-      <div class="card-body">
-        <a href="#" class="card-link">Card link</a>
-        <a href="#" class="card-link">Another link</a>
-      </div>
+     
     </div>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
