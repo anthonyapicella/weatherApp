@@ -8,6 +8,8 @@ $("#gw-btn").on('click',(function(){
 	// show the todaycard and print current date
     $("#today-card").show();
     $("#current-day").text(moment().format('MMMM Do, YYYY'));
+	$("#five-day-head").show();
+	$("#five-day-forecast").show();
 	
 	// fetch necessary data from open weather API
 	fetch("https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&units=imperial&appid=0f7a14279d2aa10b4c3e156acc3140a9")
@@ -80,7 +82,7 @@ $("#gw-btn").on('click',(function(){
 			.then(response => response.json())
 			.then(response => {
 				console.log(response)
-
+				
 				var dateDay1 = response.list[3].dt_txt
 				var tempDay1 = response.list[3].main.temp
 				var humidityDay1 = response.list[3].main.humidity
@@ -119,34 +121,30 @@ $("#gw-btn").on('click',(function(){
 				$('#wicon-4').attr('src', iconurlDay4,).width(110);
 				$('#wicon-5').attr('src', iconurlDay5,).width(110);
 
-				// for (var i = 0; i < response.list.length; i++) {
-				// 	var dateFive = response.list[0].main.temp
-				// 	var temp5day = response.list[0].main.temp
-				// 	var humidity5day = response.list[0].main.humidity
-
-				console.log(dateDay1)
-				console.log(dateDay2)
-				console.log(dateDay3)
-				console.log(dateDay4)
-				console.log(dateDay5)
+				
+				// console.log(dateDay1)
+				// console.log(dateDay2)
+				// console.log(dateDay3)
+				// console.log(dateDay4)
+				// console.log(dateDay5)
 					
-				console.log(tempDay1)
-				console.log(tempDay2)
-				console.log(tempDay3)
-				console.log(tempDay4)
-				console.log(tempDay5)
+				// console.log(tempDay1)
+				// console.log(tempDay2)
+				// console.log(tempDay3)
+				// console.log(tempDay4)
+				// console.log(tempDay5)
 					
-				console.log(humidityDay1)
-				console.log(humidityDay2)
-				console.log(humidityDay3)
-				console.log(humidityDay4)
-				console.log(humidityDay5)
+				// console.log(humidityDay1)
+				// console.log(humidityDay2)
+				// console.log(humidityDay3)
+				// console.log(humidityDay4)
+				// console.log(humidityDay5)
 
-				console.log(imgDay1)
-				console.log(imgDay2)
-				console.log(imgDay3)
-				console.log(imgDay4)
-				console.log(imgDay5)
+				// console.log(imgDay1)
+				// console.log(imgDay2)
+				// console.log(imgDay3)
+				// console.log(imgDay4)
+				// console.log(imgDay5)
 
 
 			})
