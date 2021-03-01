@@ -73,29 +73,32 @@ $("#gw-btn").on('click',(function(){
 				// console.log(uvIndex)
 				
 			})
+
+			// fetch 5 day forecast => since each day includes several times, we'll use the index numbers to grab the 12noon entry for each day
+
 			fetch("https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&units=imperial&appid=0f7a14279d2aa10b4c3e156acc3140a9")
 			.then(response => response.json())
 			.then(response => {
 				console.log(response)
-				var dateDay1 = response.list[0].dt_txt
-				var tempDay1 = response.list[0].main.temp
-				var humidityDay1 = response.list[0].main.humidity
+				var dateDay1 = response.list[3].dt_txt
+				var tempDay1 = response.list[3].main.temp
+				var humidityDay1 = response.list[3].main.humidity
 
-				var dateDay2 = response.list[7].dt_txt
-				var tempDay2 = response.list[7].main.temp
-				var humidityDay2 = response.list[7].main.humidity
+				var dateDay2 = response.list[11].dt_txt
+				var tempDay2 = response.list[11].main.temp
+				var humidityDay2 = response.list[11].main.humidity
 
-				var dateDay3 = response.list[15].dt_txt
-				var tempDay3 = response.list[15].main.temp
-				var humidityDay3 = response.list[15].main.humidity
+				var dateDay3 = response.list[19].dt_txt
+				var tempDay3 = response.list[19].main.temp
+				var humidityDay3 = response.list[19].main.humidity
 
-				var dateDay4 = response.list[23].dt_txt
-				var tempDay4 = response.list[23].main.temp
-				var humidityDay4 = response.list[23].main.humidity
+				var dateDay4 = response.list[27].dt_txt
+				var tempDay4 = response.list[27].main.temp
+				var humidityDay4 = response.list[27].main.humidity
 
-				var dateDay5 = response.list[31].dt_txt
-				var tempDay5 = response.list[31].main.temp
-				var humidityDay5 = response.list[31].main.humidity
+				var dateDay5 = response.list[35].dt_txt
+				var tempDay5 = response.list[35].main.temp
+				var humidityDay5 = response.list[35].main.humidity
 
 				// for (var i = 0; i < response.list.length; i++) {
 				// 	var dateFive = response.list[0].main.temp
