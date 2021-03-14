@@ -1,9 +1,9 @@
-// create a funciton that, on click, will retrieve user input, call weatherAPI and return weather details for given date
+// create a function that, on click, will retrieve user input, call weatherAPI and return weather details for given date
 
 var cityList = [];
+var cityName;
 
 function renderSearchList() {
-    
     var values = [],
         keys = Object.keys(localStorage),
         i = keys.length;
@@ -12,50 +12,61 @@ function renderSearchList() {
         values.push(localStorage.getItem(keys[i]));
     }
     if (values.length == keys.length) {
-
         for (j = 0; j < values.length; j++) {
             var listBtn = $("<button>")
-            .addClass("btn btn-secondary city-btn")
-            .attr("id", "city" + (j + 1))
-            .text(values[j]);
+                .addClass("btn btn-secondary city-btn")
+                .attr("id", "city" + (j + 1))
+                .text(values[j]);
             var listElem = $("<li>").attr("class", "list-group-item");
             listElem.append(listBtn);
-            console.log(listBtn);
             $("#search-history").append(listElem);
         }
     }
 }
+
 renderSearchList();
+
+$("#search-history").on("click", "button", function () {
+    // alert(this.id);
+    cityName = $(this).text();
+    // console.log(cityName);
+    searchCity();
+    // location.reload();
+    renderSearchList();
+});
+
 $("#gw-btn").on("click", function () {
+    cityName = $("#user-input").val();
+    searchCity();
+    // location.reload();
+    renderSearchList();
+});
+
+function searchCity() {
     // show the today card and 5day cards, also print current date
-    var cityName = $("#user-input").val();
     $("#today-card").show();
     $("#current-day").text(moment().format("MMMM Do, YYYY"));
     $("#five-day-head").show();
     $("#five-day-forecast").show();
-    
+
     fetch(
         "https://api.openweathermap.org/data/2.5/weather?q=" +
-        cityName +
-        "&units=imperial&appid=0f7a14279d2aa10b4c3e156acc3140a9"
-        )
+            cityName +
+            "&units=imperial&appid=0f7a14279d2aa10b4c3e156acc3140a9"
+    )
         .then((response) => response.json())
         .then((response) => {
-            console.log(response);
             // declare variables for weather values obtained from response
             var locationName = response.name;
-            console.log(response.name);
             var temp = response.main.temp;
             var humidity = response.main.humidity;
             var windSpeed = response.wind.speed;
             var weatherImg = response.weather[0].icon;
-            
+
             cityList.push(locationName);
-            
+
             localStorage.setItem(locationName, locationName);
-            // renderSearchList()
-            
-            console.log(cityList);
+
             // lat and lon will be used to pull from open weather UV API
             var lat = response.coord.lat;
             var lon = response.coord.lon;
@@ -101,8 +112,6 @@ $("#gw-btn").on("click", function () {
                     } else {
                         $("#uv-index").css("background-color", "green");
                     }
-
-                    // console.log(uvIndex)
                 });
 
             // fetch 5 day forecast => since each day includes several times, we'll use the index numbers to grab the 12noon entry for each day
@@ -114,8 +123,6 @@ $("#gw-btn").on("click", function () {
             )
                 .then((response) => response.json())
                 .then((response) => {
-                    // console.log(response);
-
                     var tempDay1 = response.list[3].main.temp;
                     var humidityDay1 = response.list[3].main.humidity;
                     var imgDay1 = response.list[3].weather[0].icon;
@@ -123,7 +130,6 @@ $("#gw-btn").on("click", function () {
                     var tempDay2 = response.list[11].main.temp;
                     var humidityDay2 = response.list[11].main.humidity;
                     var imgDay2 = response.list[11].weather[0].icon;
-                    console.log(response.list);
                     var tempDay3 = response.list[19].main.temp;
                     var humidityDay3 = response.list[19].main.humidity;
                     var imgDay3 = response.list[19].weather[0].icon;
@@ -172,4 +178,6 @@ $("#gw-btn").on("click", function () {
                     $("#humidity-day-5").text(humidityDay5 + "%");
                 });
         });
-});
+
+    
+}
