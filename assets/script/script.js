@@ -3,7 +3,7 @@
 var cityList = [];
 var cityName;
 
-function renderSearchList() {
+function renderSearchList(){
     var values = [],
         keys = Object.keys(localStorage),
         i = keys.length;
@@ -31,15 +31,12 @@ $("#search-history").on("click", "button", function () {
     cityName = $(this).text();
     // console.log(cityName);
     searchCity();
-    // location.reload();
-    renderSearchList();
 });
 
 $("#gw-btn").on("click", function () {
     cityName = $("#user-input").val();
     searchCity();
-    // location.reload();
-    renderSearchList();
+    
 });
 
 function searchCity() {
@@ -63,9 +60,9 @@ function searchCity() {
             var windSpeed = response.wind.speed;
             var weatherImg = response.weather[0].icon;
 
-            cityList.push(locationName);
+            // cityList.push(locationName);
 
-            localStorage.setItem(locationName, locationName);
+            // localStorage.setItem(locationName, locationName);
 
             // lat and lon will be used to pull from open weather UV API
             var lat = response.coord.lat;
@@ -178,6 +175,4 @@ function searchCity() {
                     $("#humidity-day-5").text(humidityDay5 + "%");
                 });
         });
-
-    
 }
