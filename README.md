@@ -19,8 +19,6 @@ V.1
 ![weatherMap Demo](/assets/images/Weather.gif)
 
 ### Deployed App
-[weatherApp ]( https://anthonyapicella.github.io/weatherApp/)
 
 ### Developed by
-
 [Anthony Apicella](https://github.com/anthonyapicella)
