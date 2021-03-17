@@ -2,8 +2,10 @@
 
 var cityList = [];
 var cityName;
+var locationName;
 
-function renderSearchList(){
+function renderSearchList() {
+    $("#search-history").empty();
     var values = [],
         keys = Object.keys(localStorage),
         i = keys.length;
@@ -14,29 +16,33 @@ function renderSearchList(){
     if (values.length == keys.length) {
         for (j = 0; j < values.length; j++) {
             var listBtn = $("<button>")
-                .addClass("btn btn-secondary city-btn")
+                .addClass("btn btn-light city-btn")
                 .attr("id", "city" + (j + 1))
                 .text(values[j]);
-            var listElem = $("<li>").attr("class", "list-group-item");
+            var listElem = $("<li>").attr("class", "list-group");
             listElem.append(listBtn);
             $("#search-history").append(listElem);
         }
     }
 }
 
-renderSearchList();
+$(document).ready(function () {
+    renderSearchList();
+});
 
 $("#search-history").on("click", "button", function () {
-    // alert(this.id);
     cityName = $(this).text();
-    // console.log(cityName);
     searchCity();
 });
 
-$("#gw-btn").on("click", function () {
+$("#get-weather-btn").on("click", function () {
     cityName = $("#user-input").val();
     searchCity();
-    
+});
+
+$("#clear-history").on("click", function () {
+    localStorage.clear();
+    window.location.reload();
 });
 
 function searchCity() {
@@ -54,15 +60,16 @@ function searchCity() {
         .then((response) => response.json())
         .then((response) => {
             // declare variables for weather values obtained from response
-            var locationName = response.name;
             var temp = response.main.temp;
             var humidity = response.main.humidity;
             var windSpeed = response.wind.speed;
             var weatherImg = response.weather[0].icon;
+            locationName = response.name;
 
-            // cityList.push(locationName);
+            cityList.push(locationName);
 
-            // localStorage.setItem(locationName, locationName);
+            localStorage.setItem(locationName, locationName);
+            renderSearchList();
 
             // lat and lon will be used to pull from open weather UV API
             var lat = response.coord.lat;
@@ -120,6 +127,7 @@ function searchCity() {
             )
                 .then((response) => response.json())
                 .then((response) => {
+                    $("#five-day-forcast").attr("class", "row d-flex justify-content-center")
                     var tempDay1 = response.list[3].main.temp;
                     var humidityDay1 = response.list[3].main.humidity;
                     var imgDay1 = response.list[3].weather[0].icon;

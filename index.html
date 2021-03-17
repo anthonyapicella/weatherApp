@@ -1,34 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Weather</title>
-    
-    <link rel="stylesheet" href="./assets/style/reset.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="./assets/style/style.css">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weather</title>
+
+  <link rel="stylesheet" href="./assets/style/reset.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Pangolin&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./assets/style/style.css">
 </head>
 
 <body>
-    <!-- Jumbotron features app title and user input field -->
-    <div class="jumbotron">
-        <h1 class="display-1">WEATHER!</h1>
-        <p class="lead">Whether you want it, or not.</p>
-        <hr class="my-4">
-        <input type="text" id="user-input" placeholder="Enter City"></input>
-        <button type="button"  id="gw-btn" class="btn btn-primary">Submit</button>
-    </div>
+  <!-- Jumbotron features app title and user input field -->
+  <div class="jumbotron text-center">
+    <h1 class="display-1">WEATHER!</h1>
+    <p class="lead">Whether you want it, or not.</p>
+    <hr class="my-4">
+    <input type="text" id="user-input" placeholder="Enter City"></input> <br><br>
+    <button type="button" id="get-weather-btn" class="btn btn-light">Submit</button>
+    <button type="button" id="clear-history" class="btn btn-light">Clear History</button>
+  </div>
 
-    <!-- list group for search history -->
+  <!-- list group for search history -->
 
-    <div class="col3">
-      <ul id= "search-history" class="list-group">
-  </ul>
-    </div>
+  <div class="container d-flex justify-content-center">
 
-    <!-- todays weather -->
+    <ul id="search-history" class="list-group col-3">
+    </ul>
 
     <div id="today-card" class="card" style="width: 18rem; display: none;">
       <div id="icon"><img id="wicon" src="" alt="Weather icon"></div>
@@ -43,19 +46,22 @@
         <li class="list-group-item">Wind Speed: <span id="wind-speed"></span></li>
         <li class="list-group-item">UV-index: <span id="uv-index"></span></li>
       </ul>
-      
     </div>
 
-    <!-- five day forecast -->
+  </div>
+  <!-- todays weather -->
+
+  <div id="five-day-container">
 
     <div class="display-4" id="five-day-head" style="display: none;">
       <h2>5-Day Forecast</h2>
     </div>
 
-    <div id="five-day-forecast" class="row" style="display: none;">
-      
-      <div class="col-sm-6">
-        <div class="card">
+
+    <div id="five-day-forecast" class="card-group row justify-content-center" style="display: none; ">
+
+      <div class="col">
+        <div class="card" style="width: 18rem;">
           <div class="card-body">
             <h6 class="card-title" id="five-day-1"></h6>
             <h5 class="card-text" id="temp-day-1"></h5>
@@ -64,8 +70,8 @@
           </div>
         </div>
       </div>
-      <div class="col-sm-6">
-        <div class="card">
+      <div class="col">
+        <div class="card" style="width: 18rem;">
           <div class="card-body">
             <h6 class="card-title" id="five-day-2"></h6>
             <h5 class="card-text" id="temp-day-2"></h5>
@@ -74,8 +80,8 @@
           </div>
         </div>
       </div>
-      <div class="col-sm-6">
-        <div class="card">
+      <div class="col">
+        <div class="card" style="width: 18rem;">
           <div class="card-body">
             <h6 class="card-title" id="five-day-3"></h6>
             <h5 class="card-text" id="temp-day-3"></h5>
@@ -84,8 +90,8 @@
           </div>
         </div>
       </div>
-      <div class="col-sm-6">
-        <div class="card">
+      <div class="col">
+        <div class="card" style="width: 18rem;">
           <div class="card-body">
             <h6 class="card-title" id="five-day-4"></h6>
             <h5 class="card-text" id="temp-day-4"></h5>
@@ -94,8 +100,8 @@
           </div>
         </div>
       </div>
-      <div class="col-sm-6">
-        <div class="card">
+      <div class="col">
+        <div class="card" style="width: 18rem;">
           <div class="card-body">
             <h6 class="card-title" id="five-day-5"></h6>
             <h5 class="card-text" id="temp-day-5"></h5>
@@ -104,15 +110,27 @@
           </div>
         </div>
       </div>
-      
-
     </div>
 
-    
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
-    <script src="./assets/script/script.js"></script>
+
+  </div>
+
+  <!-- five day forecast -->
+
+
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+    integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+  <script src="./assets/script/script.js"></script>
 </body>
+
 </html>
